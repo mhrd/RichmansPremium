@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/base_money_activity_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimary"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
+    tools:context="android.mehrdad.richmanspremium.LoginActivity">
+
+    <View
+        android:layout_width="240dp"
+        android:layout_height="360dp"
+        android:layout_alignBottom="@+id/login_layout"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/view_back_border" />
+
+    <View
+        android:layout_width="240dp"
+        android:layout_height="360dp"
+        android:layout_alignBottom="@+id/login_layout"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="5dp"
+        android:alpha="0.5"
+        android:background="@drawable/view_shadow_border" />
+
+    <RelativeLayout
+        android:id="@+id/login_layout"
+        android:layout_width="250dp"
+        android:layout_height="360dp"
+        android:layout_centerInParent="true"
+        android:background="@drawable/view_white_border">
+
+
+        <TextView
+            android:id="@+id/tv_please_enter_base_money"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_hello"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp"
+            android:gravity="right"
+            android:padding="10dp"
+            android:text="لطفا پول پایه خود را تعیین کنید"
+            android:textSize="14sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tv_explain"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_please_enter_base_money"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="5dp"
+            android:gravity="right"
+            android:paddingEnd="10dp"
+            android:paddingStart="10dp"
+            android:text="@string/base_money_explain"
+            android:textSize="12sp"
+            android:textStyle="bold" />
+
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/et_layout_base_money"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_explain"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="30dp">
+
+            <EditText
+                android:id="@+id/et_base_money"
+                android:layout_width="170dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:ems="2"
+                android:gravity="center"
+                android:hint="مبلغ پایه"
+                android:inputType="number"
+                android:maxLength="10"
+                android:maxLines="1"
+                android:paddingLeft="5dp"
+                android:singleLine="true"
+                android:textSize="14sp" />
+
+        </android.support.design.widget.TextInputLayout>
+
+
+        <Button
+            android:id="@+id/btn_start"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/et_layout_base_money"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="40dp"
+            android:background="@drawable/flat_button"
+            android:gravity="center"
+            android:padding="10dp"
+            android:text="شروع"
+            android:textColor="@color/colorAccent" />
+
+
+    </RelativeLayout>
+
+</RelativeLayout>
