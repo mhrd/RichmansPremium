@@ -33,7 +33,7 @@ public class ProductRecyclerAdapter extends RecyclerView.Adapter<ProductViewHold
         Product product = products.get(position);
 
         holder.name.setText(product.name);
-        holder.price.setText((product.price));
+        holder.price.setText(product.price);
         Glide.with(context).load(product.images.get(0)).into(holder.image);
         holder.relativeLayout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -47,4 +47,5 @@ public class ProductRecyclerAdapter extends RecyclerView.Adapter<ProductViewHold
     public int getItemCount() {
         return products.size();
     }
+
 }

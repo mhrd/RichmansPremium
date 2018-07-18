@@ -42,10 +42,11 @@
 
                     <TextView
                         android:id="@+id/txtCredit"
-                        android:layout_width="150dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerInParent="true"
                         android:gravity="center"
+                        android:maxLines="1"
                         android:textColor="@color/colorPrimary"
                         android:textSize="26sp"
                         android:visibility="invisible" />
@@ -58,9 +59,9 @@
                         android:layout_centerVertical="true"
                         android:layout_toEndOf="@+id/txtCredit"
                         android:layout_toRightOf="@+id/txtCredit"
+                        android:gravity="center"
                         android:text="@string/toman"
-                        android:textSize="16sp"
-                        android:gravity="center"/>
+                        android:textSize="16sp" />
 
                     <ProgressBar
                         android:id="@+id/prb_credit"
@@ -326,7 +327,8 @@
                     android:layout_height="100dp"
                     android:layout_marginStart="5dp"
                     android:layout_weight="1"
-                    android:background="@drawable/home_button">
+                    android:background="@drawable/home_button"
+                    android:layout_marginLeft="5dp">
 
 
                     <ImageView

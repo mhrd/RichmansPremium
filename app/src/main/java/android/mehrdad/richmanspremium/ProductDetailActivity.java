@@ -3,15 +3,12 @@ package android.mehrdad.richmanspremium;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -25,7 +22,6 @@ import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.message.BasicHeader;
 import org.apache.http.params.BasicHttpParams;
 import org.apache.http.params.HttpConnectionParams;
 import org.apache.http.params.HttpParams;
@@ -34,7 +30,6 @@ import org.apache.http.util.EntityUtils;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
-import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -55,6 +50,8 @@ public class ProductDetailActivity extends AppCompatActivity {
     Button btnBuy;
     EditText etNumber;
 
+    int price;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -70,7 +67,7 @@ public class ProductDetailActivity extends AppCompatActivity {
                 Send("http://seyyedmahdi.eu-4.evennode.com/buy",
                         getIntent().getStringArrayExtra("product")[6],
                         str,
-                        txtTotalPrice.getText().toString()
+                        (Integer.parseInt(etNumber.getText().toString()) * price)+""
                 );
             }
         });
@@ -99,8 +96,6 @@ public class ProductDetailActivity extends AppCompatActivity {
         super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
     }
 
-    int price;
-
     private void init() {
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -119,12 +114,12 @@ public class ProductDetailActivity extends AppCompatActivity {
         txtName = (TextView) findViewById(R.id.txt_name);
         txtName.setText(getIntent().getStringArrayExtra("product")[0]);
         txtPrice = (TextView) findViewById(R.id.txt_product_price);
-        txtPrice.setText(getIntent().getStringArrayExtra("product")[1]);
+        txtPrice.setText(Separate3digits(getIntent().getStringArrayExtra("product")[1]));
         txtDescription = (TextView) findViewById(R.id.txt_description);
         txtDescription.setText(getIntent().getStringArrayExtra("product")[2]);
         btnBuy = (Button) findViewById(R.id.btn_buy);
         txtTotalPrice = (TextView) findViewById(R.id.txt_product_total_price);
-        txtTotalPrice.setText(getIntent().getStringArrayExtra("product")[1]);
+        txtTotalPrice.setText(Separate3digits(getIntent().getStringArrayExtra("product")[1]));
         etNumber = (EditText) findViewById(R.id.et_number);
         etNumber.addTextChangedListener(new TextWatcher() {
             @Override
@@ -138,7 +133,7 @@ public class ProductDetailActivity extends AppCompatActivity {
                 else {
                     int tp = Integer.parseInt(etNumber.getText().toString()) * price;
 //                            Integer.parseInt(txtPrice.getText().toString());
-                    txtTotalPrice.setText(tp + "");
+                    txtTotalPrice.setText(Separate3digits(tp + ""));
                 }
 
             }
@@ -273,7 +268,7 @@ public class ProductDetailActivity extends AppCompatActivity {
         Button btnOk = (Button) dialog.findViewById(R.id.btn_ok);
 
         Random random = new Random();
-        int msgNumber = random.nextInt(19);
+        int msgNumber = random.nextInt(19)+1;
         int msgResId = getResources().getIdentifier("msg_test" + msgNumber, "string", getPackageName());
 
         txtMessage.setText(getResources().getText(msgResId));
@@ -286,5 +281,24 @@ public class ProductDetailActivity extends AppCompatActivity {
                 dialog.dismiss();
             }
         });
+    }
+
+    private String Separate3digits(String value) {
+        char[] temp = value.toCharArray();
+        String result = "";
+        int counter = 0;
+        for (int i = value.length() - 1; i >= 0; i--) {
+            result += temp[i];
+            counter++;
+            if (counter % 3 == 0 && i != 0) {
+                result += ",";
+            }
+        }
+        temp = result.toCharArray();
+        result = "";
+        for (int i = temp.length - 1; i >= 0; i--) {
+            result += temp[i];
+        }
+        return result;
     }
 }

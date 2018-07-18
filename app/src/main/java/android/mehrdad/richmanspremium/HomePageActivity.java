@@ -224,7 +224,7 @@ public class HomePageActivity extends AppCompatActivity implements View.OnClickL
 
                     txtDay.setText(day);
 
-                    txtCredit.setText(credit);
+                    txtCredit.setText(Separate3digits(credit));
 
                 } catch (JSONException e) {
                     // JSON error
@@ -261,19 +261,24 @@ public class HomePageActivity extends AppCompatActivity implements View.OnClickL
         AppController.getInstance().addToRequestQueue(strReq, tag_string_req);
     }
 
-//    private String Separate3digits(String value) {
-//        char[] temp = value.toCharArray();
-//        String result = "";
-//        int counter = 0;
-//        for (int i = value.length() - 1; i >= 0; i--) {
-//            result += temp[i];
-//            counter++;
-//            if (counter % 3 == 0) {
-//                result += ",";
-//            }
-//        }
-//        return result;
-//    }
+    private String Separate3digits(String value) {
+        char[] temp = value.toCharArray();
+        String result = "";
+        int counter = 0;
+        for (int i = value.length() - 1; i >= 0; i--) {
+            result += temp[i];
+            counter++;
+            if (counter % 3 == 0 && i != 0) {
+                result += ",";
+            }
+        }
+        temp = result.toCharArray();
+        result="";
+        for (int i = temp.length - 1; i >= 0; i--) {
+            result += temp[i];
+        }
+        return result;
+    }
 
     private void showDialog() {
         final Dialog dialog = new Dialog(this);
@@ -284,7 +289,7 @@ public class HomePageActivity extends AppCompatActivity implements View.OnClickL
         Button btnOk = (Button) dialog.findViewById(R.id.btn_ok);
 
         Random random = new Random();
-        int msgNumber = random.nextInt(19);
+        int msgNumber = random.nextInt(19)+1;
         int msgResId = getResources().getIdentifier("msg_test" + msgNumber, "string", getPackageName());
 
         txtMessage.setText(getResources().getText(msgResId));
