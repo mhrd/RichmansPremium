@@ -16,6 +16,7 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_below="@id/toolbar">
 
@@ -50,19 +51,22 @@
                         android:visibility="invisible" />
 
 
-                    <ImageView
-                        android:id="@+id/img_coin"
+                    <TextView
+                        android:id="@+id/img_toman"
                         android:layout_width="40dp"
                         android:layout_height="40dp"
                         android:layout_centerVertical="true"
                         android:layout_toEndOf="@+id/txtCredit"
-                        android:src="@drawable/coins" />
+                        android:layout_toRightOf="@+id/txtCredit"
+                        android:text="@string/toman"
+                        android:textSize="16sp"
+                        android:gravity="center"/>
 
                     <ProgressBar
                         android:id="@+id/prb_credit"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_alignBaseline="@+id/img_coin"
+                        android:layout_alignBaseline="@+id/img_toman"
                         android:layout_marginTop="10dp"
                         android:theme="@style/ProgressBarTheme" />
 
@@ -70,6 +74,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentBottom="true"
+                        android:layout_alignParentLeft="true"
                         android:layout_alignParentStart="true"
                         android:layout_marginTop="10dp"
                         android:background="@drawable/view_back_border"
@@ -147,6 +152,7 @@
                     android:id="@+id/btn_store"
                     android:layout_width="wrap_content"
                     android:layout_height="100dp"
+                    android:layout_marginLeft="5dp"
                     android:layout_marginStart="5dp"
                     android:layout_weight="1"
                     android:background="@drawable/home_button">
@@ -215,6 +221,7 @@
                     android:id="@+id/btn_history"
                     android:layout_width="wrap_content"
                     android:layout_height="100dp"
+                    android:layout_marginLeft="5dp"
                     android:layout_marginStart="5dp"
                     android:layout_weight="1"
                     android:background="@drawable/home_button">
@@ -257,8 +264,10 @@
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:layout_centerVertical="true"
+                    android:layout_marginLeft="20dp"
                     android:layout_marginStart="20dp"
                     android:layout_toEndOf="@id/txt_share"
+                    android:layout_toRightOf="@id/txt_share"
                     android:src="@drawable/share"
                     android:textColor="@color/colorRaisedButtonText" />
 
@@ -344,6 +353,7 @@
                     android:id="@+id/btn_contact_us"
                     android:layout_width="wrap_content"
                     android:layout_height="100dp"
+                    android:layout_marginLeft="5dp"
                     android:layout_marginStart="5dp"
                     android:layout_weight="1"
                     android:background="@drawable/home_button">
@@ -387,8 +397,10 @@
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:layout_centerVertical="true"
+                    android:layout_marginLeft="20dp"
                     android:layout_marginStart="20dp"
                     android:layout_toEndOf="@id/txt_reset"
+                    android:layout_toRightOf="@id/txt_reset"
                     android:src="@drawable/reset"
                     android:textColor="@color/colorRaisedButtonText" />
 

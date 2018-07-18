@@ -41,6 +41,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Random;
 
 import me.relex.circleindicator.CircleIndicator;
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
@@ -74,6 +75,7 @@ public class ProductDetailActivity extends AppCompatActivity {
             }
         });
     }
+
 
     public String readFileAsString(Context context, String filePath) {
         StringBuilder stringBuilder = new StringBuilder();
@@ -207,6 +209,7 @@ public class ProductDetailActivity extends AppCompatActivity {
                     public void run() {
                         hidePDialog();
                         tt("با موفقیت انجام شد");
+                        showDialog();
                         ProductDetailActivity.this.finish();
                     }
                 });
@@ -259,5 +262,29 @@ public class ProductDetailActivity extends AppCompatActivity {
             pDialog.dismiss();
             pDialog = null;
         }
+    }
+
+    private void showDialog() {
+        final Dialog dialog = new Dialog(this);
+        dialog.setContentView(R.layout.activity_dialog);
+        dialog.setCancelable(false);
+
+        TextView txtMessage = (TextView) dialog.findViewById(R.id.txt_message);
+        Button btnOk = (Button) dialog.findViewById(R.id.btn_ok);
+
+        Random random = new Random();
+        int msgNumber = random.nextInt(19);
+        int msgResId = getResources().getIdentifier("msg_test" + msgNumber, "string", getPackageName());
+
+        txtMessage.setText(getResources().getText(msgResId));
+
+        dialog.show();
+
+        btnOk.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
     }
 }
