@@ -1,14 +1,14 @@
 package android.mehrdad.richmanspremium;
 
+import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
-import android.content.Context;
-import android.content.Intent;
-import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.webkit.WebSettings;
+import android.webkit.WebView;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.Toast;
 
 import org.apache.http.HttpResponse;
@@ -17,86 +17,83 @@ import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.message.BasicHeader;
 import org.apache.http.params.BasicHttpParams;
 import org.apache.http.params.HttpConnectionParams;
 import org.apache.http.params.HttpParams;
-import org.apache.http.protocol.HTTP;
 import org.apache.http.util.EntityUtils;
 import org.json.JSONObject;
 
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
+import java.net.URLEncoder;
 
-import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
+public class PurchaseActivity extends AppCompatActivity {
 
-public class SetBaseMoneyActivity extends AppCompatActivity {
-
-    EditText etBaseMoney;
-    Button btnStart;
+    Button exit;
+    ProgressDialog pDialog;
+    WebView wv;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_set_base_money);
+        setContentView(R.layout.activity_purchase);
 
-        init();
+        exit = (Button) findViewById(R.id.btn_exit);
+        exit.setEnabled(false);
 
-        btnStart.setOnClickListener(new View.OnClickListener() {
+        Send1("https://pay.ir/payment/send");
+
+        wv = (WebView) findViewById(R.id.wv);
+
+        wv.getSettings().setJavaScriptEnabled(true);
+
+        exit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (etBaseMoney.getText().toString().equals("") || etBaseMoney.getText().toString().length() > 10) {
-                    etBaseMoney.setError("کد را صحیح وارد کنید");
-                    return;
-                }
-                setBase(etBaseMoney.getText().toString(), getIntent().getStringExtra("phn"));
+//                System.exit(0);
+                tt();
             }
         });
+
     }
 
-    private void init() {
-        etBaseMoney = (EditText) findViewById(R.id.et_base_money);
-        btnStart = (Button) findViewById(R.id.btn_start);
+    void tt() {
+        Toast.makeText(this, wv.getUrl() + "", Toast.LENGTH_SHORT).show();
     }
 
-    @Override
-    protected void attachBaseContext(Context newBase) {
-        super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
-    }
-
-    void setBase(String bMoney, String phn) {
-        Send("http://89.163.249.183:3000/startgame", phn, bMoney);
-    }
-
-    private ProgressDialog pDialog;
-
-    void Send(final String URL, final String phn, final String bMoney) {
+    void Send1(final String URL) {
         Log.d("req", "___send started");
         pDialog = new ProgressDialog(this);
         pDialog.setMessage("لطفا صبر کنید");
         pDialog.show();
-
-        final Map<String, String> postParam = new HashMap<String, String>();
-
-        postParam.put("id", phn);
-        postParam.put("base", bMoney);
-
-
         ////////////////////////////////////////////////////////
 
         final Thread send = new Thread(new Runnable() {
             @Override
             public void run() {
 
-                JSONObject obj = new JSONObject(postParam);
+                JSONObject obj = new JSONObject();
 
+                try {
+//                    obj.put("api", "997fb31002ac609f2ff5ca6a5a3e908b");
+                    obj.put("api", "44ff86905313e61b94c0ba7c65897c6a");
+//                    obj.put("api", "test");
+                    obj.put("amount", 10000);
+                    obj.put("redirect",
+                            URLEncoder.encode("http://www.madresetavangari.ir/pay/verify"));
+//                    obj.put("redirect", "https://www.madresetavangari.ir/pay/verify");
+                    obj.put("factorNumber", HomePageActivity.phn);
+//                    obj.put("factorNumber", "1");
+                } catch (Exception e) {
+                    //
+                }
                 postData(URL, obj);
 
             }
         });
         send.start();
     }
+
+    String tr;
 
     public void postData(String url, JSONObject obj) {
         // Create a new HttpClient and Post Header
@@ -117,23 +114,15 @@ public class SetBaseMoneyActivity extends AppCompatActivity {
 
             HttpResponse response = httpclient.execute(httppost);
             String temp = EntityUtils.toString(response.getEntity());
-            if (!temp.contains("ok")) {
+            if (temp.contains("transId")) {
+                tr = temp.substring(temp.indexOf("transId") + 9, temp.length() - 1);
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
+//                        wv.loadUrl("http://www.madresetavangari.ir/pay/verify/");
+                        wv.loadUrl("https://pay.ir/payment/gateway/" + tr);
                         hidePDialog();
-                        tt("خطا در ارسال داده");
-
-                        //////////////sample
-//                        tran();
-                        //////////////sample
-                    }
-                });
-            } else {
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        tran();
+                        exit.setEnabled(true);
                     }
                 });
             }
@@ -160,16 +149,6 @@ public class SetBaseMoneyActivity extends AppCompatActivity {
             pDialog.dismiss();
             pDialog = null;
         }
-    }
-
-    void tt(String msg) {
-        Toast.makeText(this, msg, Toast.LENGTH_LONG).show();
-    }
-
-    void tran() {
-//        Intent i = new Intent(SetBaseMoneyActivity.this, HomePageActivity.class);
-//        startActivity(i);
-        this.finish();
     }
 
 }

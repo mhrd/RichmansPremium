@@ -74,7 +74,8 @@ public class TutorialActivity extends AppCompatActivity implements View.OnClickL
 
             //video
             case 1:
-                String path = getFilesDir().getAbsolutePath() + "/.richmans/" + getIntent().getStringExtra("id") +
+                String path = getFilesDir().getAbsolutePath() + "/.richmans/" +
+                        getIntent().getStringExtra("id") +
                         ".mp4";
                 if (new File(path).exists()) {
                     Uri uri = Uri.parse(path);

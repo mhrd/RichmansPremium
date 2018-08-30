@@ -43,12 +43,14 @@ import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 public class HomePageActivity extends AppCompatActivity implements View.OnClickListener {
 
+    static String plan;
+
     Toolbar toolbar;
     RelativeLayout btnLearn, btnStore, btnHowToStart, btnHistory, btnAboutUs, btnAboutGame, btnContactUs, btnShare, btnReset;
     TextView txtCredit, txtDay;
     ProgressBar prbCredit;
 
-    String phn;
+    static String phn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,7 +73,7 @@ public class HomePageActivity extends AppCompatActivity implements View.OnClickL
     @Override
     protected void onResume() {
         super.onResume();
-        loadCredit("http://seyyedmahdi.eu-4.evennode.com/getmoney");
+        loadCredit("http://89.163.249.183:3000/getmoney");
     }
 
     void init() {
@@ -218,6 +220,7 @@ public class HomePageActivity extends AppCompatActivity implements View.OnClickL
                     if (status.equals("ok")) {
                         credit = jObj.getString("money");
                         day = jObj.getString("day");
+                        plan = jObj.getString("plan");
                     }
                     prbCredit.setVisibility(View.INVISIBLE);
                     txtCredit.setVisibility(View.VISIBLE);
@@ -273,7 +276,7 @@ public class HomePageActivity extends AppCompatActivity implements View.OnClickL
             }
         }
         temp = result.toCharArray();
-        result="";
+        result = "";
         for (int i = temp.length - 1; i >= 0; i--) {
             result += temp[i];
         }
@@ -289,7 +292,7 @@ public class HomePageActivity extends AppCompatActivity implements View.OnClickL
         Button btnOk = (Button) dialog.findViewById(R.id.btn_ok);
 
         Random random = new Random();
-        int msgNumber = random.nextInt(19)+1;
+        int msgNumber = random.nextInt(34) + 1;
         int msgResId = getResources().getIdentifier("msg_test" + msgNumber, "string", getPackageName());
 
         txtMessage.setText(getResources().getText(msgResId));

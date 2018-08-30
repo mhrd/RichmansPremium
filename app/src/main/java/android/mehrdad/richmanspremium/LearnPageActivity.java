@@ -13,6 +13,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonArrayRequest;
+
 import android.mehrdad.richmanspremium.app.AppController;
 import android.mehrdad.richmanspremium.model.Mproduct;
 
@@ -96,7 +97,7 @@ public class LearnPageActivity extends AppCompatActivity {
         pDialog.setMessage("لطفا صبر کنید");
         pDialog.show();
 
-        String url = "http://seyyedmahdi.eu-4.evennode.com/getfilmlist";
+        String url = "http://89.163.249.183:3000/getfilmlist";
         // Creating volley request obj
         JsonArrayRequest Req = new JsonArrayRequest(url,
                 new Response.Listener<JSONArray>() {
@@ -110,6 +111,7 @@ public class LearnPageActivity extends AppCompatActivity {
                                 Tutorial t = new Tutorial();
                                 t.id = obj.getString("_id");
                                 t.name = obj.getString("name");
+                                t.plan = obj.getString("plan");
                                 t.explain = obj.getString("comment");
                                 t.type = Integer.parseInt(obj.getString("type"));
                                 switch (t.type) {
