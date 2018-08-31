@@ -44,6 +44,7 @@ public class TutorialRecyclerAdapter extends RecyclerView.Adapter<TutorialViewHo
             public void onClick(View v) {
                 if (tutorial.plan.equals("p") && !HomePageActivity.plan.equals("p")) {
                     Intent i = new Intent(context, PurchaseActivity.class);
+                    i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     context.startActivity(i);
 
 //                    Toast.makeText(view.getContext(), "برای استفاده از این آموزش نسخه اصلی برنامه را تهیه کنید", Toast.LENGTH_LONG).show();
