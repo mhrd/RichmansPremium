@@ -2,6 +2,7 @@ package android.mehrdad.richmanspremium;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DividerItemDecoration;
@@ -16,6 +17,9 @@ import com.android.volley.toolbox.JsonArrayRequest;
 
 import android.mehrdad.richmanspremium.app.AppController;
 import android.mehrdad.richmanspremium.model.Mproduct;
+import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -30,7 +34,10 @@ public class LearnPageActivity extends AppCompatActivity {
 
     RecyclerView recTutorials;
     List<Tutorial> tutorials;
+    TextView ttemp;
+    Button buytt;
 
+    String pl;
     private static final String TAG = LearnPageActivity.class.getSimpleName();
 
     @Override
@@ -38,6 +45,19 @@ public class LearnPageActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_learn_page);
 
+        pl = getIntent().getStringExtra("plan");
+        ttemp = (TextView) findViewById(R.id.ttemp);
+        buytt = (Button) findViewById(R.id.buytt);
+        buytt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                tr();
+            }
+        });
+        if (pl.equals("p")) {
+            ttemp.setVisibility(View.VISIBLE);
+            buytt.setVisibility(View.VISIBLE);
+        }
         recTutorials = (RecyclerView) findViewById(R.id.rec_tutorials);
         tutorials = new ArrayList<>();
 
@@ -82,6 +102,12 @@ public class LearnPageActivity extends AppCompatActivity {
 //        recTutorials.setAdapter(new TutorialRecyclerAdapter(getApplicationContext(), tutorials));
 //        DividerItemDecoration itemDecor = new DividerItemDecoration(this, DividerItemDecoration.VERTICAL);
 //        recTutorials.addItemDecoration(itemDecor);
+    }
+
+    void tr() {
+        Intent i = new Intent(this, PurchaseActivity.class);
+        i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(i);
     }
 
     @Override
@@ -131,7 +157,11 @@ public class LearnPageActivity extends AppCompatActivity {
                                         t.image = R.drawable.text;
                                         break;
                                 }
-                                tutorials.add(t);
+                                if (pl.equals(t.plan)) {
+                                    tutorials.add(t);
+                                } else {
+                                    //
+                                }
 
                             } catch (JSONException e) {
                                 e.printStackTrace();

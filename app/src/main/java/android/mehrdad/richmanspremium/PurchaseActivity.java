@@ -49,8 +49,8 @@ public class PurchaseActivity extends AppCompatActivity {
         exit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                System.exit(0);
-                tt();
+                System.exit(0);
+//                tt();
             }
         });
 
@@ -77,7 +77,7 @@ public class PurchaseActivity extends AppCompatActivity {
 //                    obj.put("api", "997fb31002ac609f2ff5ca6a5a3e908b");
                     obj.put("api", "44ff86905313e61b94c0ba7c65897c6a");
 //                    obj.put("api", "test");
-                    obj.put("amount", 10000);
+                    obj.put("amount", 100000);
                     obj.put("redirect",
                             URLEncoder.encode("http://www.madresetavangari.ir/pay/verify"));
 //                    obj.put("redirect", "https://www.madresetavangari.ir/pay/verify");
