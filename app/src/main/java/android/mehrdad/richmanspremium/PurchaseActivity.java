@@ -1,14 +1,14 @@
 package android.mehrdad.richmanspremium;
 
-import android.annotation.SuppressLint;
+import android.app.Dialog;
 import android.app.ProgressDialog;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
-import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import org.apache.http.HttpResponse;
@@ -49,7 +49,8 @@ public class PurchaseActivity extends AppCompatActivity {
         exit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                System.exit(0);
+                showDialog();
+//                System.exit(0);
 //                tt();
             }
         });
@@ -149,6 +150,28 @@ public class PurchaseActivity extends AppCompatActivity {
             pDialog.dismiss();
             pDialog = null;
         }
+    }
+
+    private void showDialog() {
+        final Dialog dialog = new Dialog(this);
+        dialog.setContentView(R.layout.activity_dialog);
+        dialog.setCancelable(false);
+
+        TextView txtMessage = (TextView) dialog.findViewById(R.id.txt_message);
+        Button btnOk = (Button) dialog.findViewById(R.id.btn_ok);
+
+        txtMessage.setText("از اعتماد و خرید شما متشکریم، همراهی پر ثمر ما با شما تا پایان راهی " +
+                "که آغازش کرده اید، از هم اکنون شروع شد.");
+
+        dialog.show();
+
+        btnOk.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                System.exit(0);
+//                PurchaseActivity.this.finish();
+            }
+        });
     }
 
 }

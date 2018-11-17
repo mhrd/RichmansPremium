@@ -36,7 +36,6 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Random;
 
 import me.relex.circleindicator.CircleIndicator;
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
@@ -64,10 +63,10 @@ public class ProductDetailActivity extends AppCompatActivity {
             public void onClick(View v) {
                 //buy
                 String str = readFileAsString(getBaseContext(), getFilesDir().getAbsolutePath() + "/.richmans/phn.txt");
-                Send("http://89.163.249.183:3000/buy",
+                Send("http://madresetavangari.ir/buy",
                         getIntent().getStringArrayExtra("product")[6],
                         str,
-                        (Integer.parseInt(etNumber.getText().toString()) * price)+""
+                        (Integer.parseInt(etNumber.getText().toString()) * price) + ""
                 );
             }
         });
@@ -265,8 +264,7 @@ public class ProductDetailActivity extends AppCompatActivity {
         TextView txtMessage = (TextView) dialog.findViewById(R.id.txt_message);
         Button btnOk = (Button) dialog.findViewById(R.id.btn_ok);
 
-        txtMessage.setText("از اعتماد و خرید شما متشکریم، همراهی پر ثمر ما با شما تا پایان راهی " +
-                "که آغازش کرده اید، از هم اکنون شروع شد.");
+        txtMessage.setText("خرید شما با موفقیت انجام شد");
 
         dialog.show();
 
