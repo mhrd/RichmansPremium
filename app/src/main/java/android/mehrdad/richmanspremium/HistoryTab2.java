@@ -65,7 +65,7 @@ public class HistoryTab2 extends Fragment {
 
 //    void getHistory(String phn) {
 //
-//        String url = "http://89.163.249.183:3000" + phn;
+//        String url = "http://madresetavangari.ir" + phn;
 //
 //        pDialog = new ProgressDialog(getContext());
 //        pDialog.setMessage("لطفا صبر کنید");
