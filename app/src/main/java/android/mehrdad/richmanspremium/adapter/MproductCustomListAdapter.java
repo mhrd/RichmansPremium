@@ -65,6 +65,7 @@ public class MproductCustomListAdapter extends BaseAdapter {
 
         Mproduct m = product.get(position);
 
+        //
         // thumbnail image
         thumbNail.setImageUrl(m.getThumbnailUrl(), imageLoader);
 
