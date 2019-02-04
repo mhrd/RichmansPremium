@@ -13,23 +13,39 @@
         android:background="?attr/colorPrimary"
         app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar" />
 
-    <TextView
-        android:id="@+id/ttemp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/toolbar"
-        android:gravity="center"
-        android:text="محتوای دوره آموزشی تخصصی ثروتمندان\nبرای مشاهده باید دوره را خریداری کنید"
-        android:visibility="gone" />
-
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rec_tutorials"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_above="@+id/buytt"
-        android:layout_below="@id/ttemp"
-        android:layoutDirection="ltr" />
+        android:layout_below="@id/toolbar"
+        android:layoutDirection="ltr"
+        android:visibility="gone" />
+
+
+    <ScrollView
+        android:id="@+id/scrView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/buytt"
+        android:layout_below="@id/toolbar"
+        android:layout_marginBottom="16dp"
+        android:visibility="gone">
+
+        <TextView
+            android:id="@+id/ttemp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="right"
+            android:lineSpacingExtra="10dp"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:text="@string/proLearnPage"
+            android:textSize="16sp" />
+
+
+    </ScrollView>
 
     <Button
         android:id="@+id/buytt"
@@ -38,7 +54,7 @@
         android:layout_alignParentBottom="true"
         android:layout_margin="2dp"
         android:background="@color/colorPrimaryDark"
-        android:text="خرید دوره با مبلغ 10000 تومان"
+        android:text="خرید دوره با مبلغ 98000 تومان"
         android:visibility="gone" />
 
 </RelativeLayout>

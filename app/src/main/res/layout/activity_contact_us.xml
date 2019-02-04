@@ -180,7 +180,7 @@
         android:layout_marginStart="20dp"
         android:layout_toLeftOf="@id/txt_email"
         android:layout_toStartOf="@id/txt_email"
-        android:text="www.madresetavangari.ir"
+        android:text="www.madrasetavangari.ir"
         android:textSize="16sp" />
 
     <TextView

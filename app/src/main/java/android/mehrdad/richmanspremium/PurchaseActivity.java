@@ -40,7 +40,7 @@ public class PurchaseActivity extends AppCompatActivity {
         exit = (Button) findViewById(R.id.btn_exit);
         exit.setEnabled(false);
 
-        Send1("https://pay.ir/payment/send");
+        Send1("https://pay.ir/pg/send");
 
         wv = (WebView) findViewById(R.id.wv);
 
@@ -78,7 +78,7 @@ public class PurchaseActivity extends AppCompatActivity {
 //                    obj.put("api", "997fb31002ac609f2ff5ca6a5a3e908b");
                     obj.put("api", "44ff86905313e61b94c0ba7c65897c6a");
 //                    obj.put("api", "test");
-                    obj.put("amount", 100000);
+                    obj.put("amount", 980000);
                     obj.put("redirect",
                             URLEncoder.encode("http://www.madresetavangari.ir/pay/verify"));
 //                    obj.put("redirect", "https://www.madresetavangari.ir/pay/verify");
@@ -121,7 +121,7 @@ public class PurchaseActivity extends AppCompatActivity {
                     @Override
                     public void run() {
 //                        wv.loadUrl("http://www.madresetavangari.ir/pay/verify/");
-                        wv.loadUrl("https://pay.ir/payment/gateway/" + tr);
+                        wv.loadUrl("https://pay.ir/pg/gateway/" + tr);
                         hidePDialog();
                         exit.setEnabled(true);
                     }

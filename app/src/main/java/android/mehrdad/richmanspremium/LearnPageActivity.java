@@ -19,7 +19,9 @@ import android.mehrdad.richmanspremium.app.AppController;
 import android.mehrdad.richmanspremium.model.Mproduct;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ScrollView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -36,6 +38,7 @@ public class LearnPageActivity extends AppCompatActivity {
     List<Tutorial> tutorials;
     TextView ttemp;
     Button buytt;
+    ScrollView scrollView;
 
     String pl;
     private static final String TAG = LearnPageActivity.class.getSimpleName();
@@ -47,7 +50,10 @@ public class LearnPageActivity extends AppCompatActivity {
 
         pl = getIntent().getStringExtra("plan");
         ttemp = (TextView) findViewById(R.id.ttemp);
+        scrollView=(ScrollView)findViewById(R.id.scrView);
         buytt = (Button) findViewById(R.id.buytt);
+        recTutorials = (RecyclerView) findViewById(R.id.rec_tutorials);
+
         buytt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -55,16 +61,20 @@ public class LearnPageActivity extends AppCompatActivity {
             }
         });
         if (pl.equals("p")) {
-            ttemp.setVisibility(View.VISIBLE);
+            scrollView.setVisibility(View.VISIBLE);
             buytt.setVisibility(View.VISIBLE);
+            recTutorials.setVisibility(View.GONE);
         }
-        recTutorials = (RecyclerView) findViewById(R.id.rec_tutorials);
+        if (pl.equals("u")){
+            scrollView.setVisibility(View.GONE);
+            buytt.setVisibility(View.GONE);
+            recTutorials.setVisibility(View.VISIBLE);
+        }
         tutorials = new ArrayList<>();
 
         getList();
 
-//        //sample init
-//
+//        ///start region test
 //        Tutorial tutorial1 = new Tutorial();
 //        tutorial1.id = "tt1";
 //        tutorial1.name = "بازی که بازی نیست";
@@ -94,14 +104,15 @@ public class LearnPageActivity extends AppCompatActivity {
 //        tutorialSound.explain = "یه صدایی دیگه نمونست";
 //        tutorialSound.type = 3;
 //        tutorials.add(tutorialSound);
-
-
+//
+//
 //        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
 //        recTutorials.setLayoutManager(linearLayoutManager);
 //        recTutorials.setHasFixedSize(true);
 //        recTutorials.setAdapter(new TutorialRecyclerAdapter(getApplicationContext(), tutorials));
 //        DividerItemDecoration itemDecor = new DividerItemDecoration(this, DividerItemDecoration.VERTICAL);
 //        recTutorials.addItemDecoration(itemDecor);
+//        ///end region test
     }
 
     void tr() {
@@ -200,5 +211,4 @@ public class LearnPageActivity extends AppCompatActivity {
             pDialog = null;
         }
     }
-
 }
