@@ -74,6 +74,7 @@ public class LearnPageActivity extends AppCompatActivity {
 
         getList();
 
+        //
 //        ///start region test
 //        Tutorial tutorial1 = new Tutorial();
 //        tutorial1.id = "tt1";
