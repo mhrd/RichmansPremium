@@ -43,13 +43,13 @@ public class MiddleTut extends AppCompatActivity {
 
     void tran1() {
         Intent i = new Intent(this, LearnPageActivity.class);
-        i.putExtra("plan", "u");
+        i.putExtra("az", "r");
         startActivity(i);
     }
 
     void tran2() {
         Intent i = new Intent(this, LearnPageActivity.class);
-        i.putExtra("plan", "p");
+        i.putExtra("az", "p");
         startActivity(i);
     }
 }

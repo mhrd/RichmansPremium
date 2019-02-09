@@ -40,6 +40,7 @@ public class LearnPageActivity extends AppCompatActivity {
     Button buytt;
     ScrollView scrollView;
 
+    String az;
     String pl;
     private static final String TAG = LearnPageActivity.class.getSimpleName();
 
@@ -48,9 +49,9 @@ public class LearnPageActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_learn_page);
 
-        pl = getIntent().getStringExtra("plan");
+        az = getIntent().getStringExtra("az");
         ttemp = (TextView) findViewById(R.id.ttemp);
-        scrollView=(ScrollView)findViewById(R.id.scrView);
+        scrollView = (ScrollView) findViewById(R.id.scrView);
         buytt = (Button) findViewById(R.id.buytt);
         recTutorials = (RecyclerView) findViewById(R.id.rec_tutorials);
 
@@ -60,15 +61,23 @@ public class LearnPageActivity extends AppCompatActivity {
                 tr();
             }
         });
-        if (pl.equals("p")) {
-            scrollView.setVisibility(View.VISIBLE);
-            buytt.setVisibility(View.VISIBLE);
-            recTutorials.setVisibility(View.GONE);
-        }
-        if (pl.equals("u")){
+        if (az.equals("r")) {
+            pl = "u";
             scrollView.setVisibility(View.GONE);
             buytt.setVisibility(View.GONE);
             recTutorials.setVisibility(View.VISIBLE);
+        }
+        if (az.equals("p")) {
+            pl = HomePageActivity.plan;
+            if (pl.equals("p")) {
+                scrollView.setVisibility(View.GONE);
+                buytt.setVisibility(View.GONE);
+                recTutorials.setVisibility(View.VISIBLE);
+            } else if (pl.equals("u")) {
+                scrollView.setVisibility(View.VISIBLE);
+                buytt.setVisibility(View.VISIBLE);
+                recTutorials.setVisibility(View.GONE);
+            }
         }
         tutorials = new ArrayList<>();
 
